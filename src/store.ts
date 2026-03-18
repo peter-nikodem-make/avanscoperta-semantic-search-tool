@@ -54,4 +54,9 @@ export class VectorStore {
     const data = await readFile(filePath, "utf-8");
     this.entries = JSON.parse(data) as StoreEntry[];
   }
+
+  /** Return the unique list of source document names in the store. */
+  getSources(): string[] {
+    return [...new Set(this.entries.map((e) => e.source))];
+  }
 }

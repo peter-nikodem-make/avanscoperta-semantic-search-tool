@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "semantic-search": {
+      "command": "npx",
+      "args": ["tsx", "src/mcp-server.ts"],
+      "cwd": "${workspaceFolder}"
+    }
+  }
+}
