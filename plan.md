@@ -7,7 +7,7 @@ todos:
     status: completed
   - id: step-2
     content: "Step 2 — Embeddings: integrate @huggingface/transformers, embed() function, unit test"
-    status: pending
+    status: completed
   - id: step-3
     content: "Step 3 — Chunking: paragraph-based chunking with overlap, unit tests"
     status: pending
