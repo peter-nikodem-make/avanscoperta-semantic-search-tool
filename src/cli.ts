@@ -1,4 +1,6 @@
 import { Command } from "commander";
+import { indexFile } from "./indexer.js";
+import { searchQuery, formatResults } from "./searcher.js";
 
 const program = new Command();
 
@@ -12,9 +14,10 @@ program
   .description("Index a document for semantic search")
   .argument("<file>", "path to the file to index")
   .option("-s, --store <path>", "path to the index store", "./search-index.json")
-  .action((file: string, options: { store: string }) => {
-    console.log(`[stub] Indexing file: ${file}`);
-    console.log(`[stub] Store path: ${options.store}`);
+  .action(async (file: string, options: { store: string }) => {
+    console.log(`Indexing: ${file}`);
+    const result = await indexFile(file, { storePath: options.store });
+    console.log(`Done. Indexed ${result.chunksIndexed} chunks → ${options.store}`);
   });
 
 program
@@ -23,9 +26,12 @@ program
   .argument("<question>", "the question to search for")
   .option("-s, --store <path>", "path to the index store", "./search-index.json")
   .option("-k, --top-k <number>", "number of results to return", "5")
-  .action((question: string, options: { store: string; topK: string }) => {
-    console.log(`[stub] Searching for: ${question}`);
-    console.log(`[stub] Store: ${options.store}, Top-K: ${options.topK}`);
+  .action(async (question: string, options: { store: string; topK: string }) => {
+    const result = await searchQuery(question, {
+      storePath: options.store,
+      topK: parseInt(options.topK, 10),
+    });
+    console.log(formatResults(result));
   });
 
 program.parse();
