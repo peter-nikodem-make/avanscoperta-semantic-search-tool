@@ -10,7 +10,7 @@ todos:
     status: completed
   - id: step-3
     content: "Step 3 — Chunking: paragraph-based chunking with overlap, unit tests"
-    status: pending
+    status: completed
   - id: step-4
     content: "Step 4 — Vector Store: in-memory store with cosine similarity search, persistence, unit tests"
     status: pending
